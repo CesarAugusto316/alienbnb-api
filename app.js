@@ -8,6 +8,7 @@ app.get("/", (req, res) => {
     status: "sucess",
     data: {
       message: "hello world aliebnb",
+      student: "César Rivera",
     },
   });
 });
