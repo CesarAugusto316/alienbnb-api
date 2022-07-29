@@ -9,6 +9,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "import/extensions": "off",
     "max-classes-per-file": "off",
     "consistent-return": "off",
     "no-restricted-globals": "off",
