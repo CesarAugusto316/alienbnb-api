@@ -1,25 +1,21 @@
-import { Post } from '../models/postModel.js';
+import { Todo } from '../models/todoModel.js';
 
 /**
  *
  * @type {import("express").RequestHandler}
  */
-export const getAllPosts = async (__, res) => {
+export const getAllTodos = async (__, res) => {
   try {
-    const posts = await Post.find();
+    const allTodos = await Todo.find();
     res.status(200).json({
       status: 'success',
-      data: {
-        size: posts.length,
-        posts,
-      },
+      size: allTodos.length,
+      allTodos,
     });
   } catch (error) {
     res.status(404).json({
       status: 'fail',
-      data: {
-        message: error.message,
-      },
+      message: error.message,
     });
   }
 };
@@ -28,23 +24,18 @@ export const getAllPosts = async (__, res) => {
  *
  * @type {import("express").RequestHandler}
  */
-export const getPost = async (req, res) => {
+export const getTodo = async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await Post.findById(id);
-
+    const todo = await Todo.findById(id);
     res.status(200).json({
       status: 'success',
-      data: {
-        post,
-      },
+      todo,
     });
   } catch (error) {
     res.status(404).json({
       status: 'fail',
-      data: {
-        message: error.message,
-      },
+      message: error.message,
     });
   }
 };
@@ -54,12 +45,12 @@ export const getPost = async (req, res) => {
  * @type {import("express").RequestHandler}
  */
 export const checkBody = (req, res, next) => {
-  if ('post' in req.body) {
+  if ('todo' in req.body) {
     next();
   } else {
     res.status(409).json({
       status: 'fail',
-      message: 'You must provide a post',
+      message: 'You must provide a todo',
     });
   }
 };
@@ -68,26 +59,21 @@ export const checkBody = (req, res, next) => {
  *
  * @type {import("express").RequestHandler}
  */
-export const createPost = async (req, res) => {
+export const createTodo = async (req, res) => {
   try {
-    console.log(req.body);
-    const post = await Post.create(req.body);
-    const allPosts = await Post.find();
+    const newTodo = await Todo.create(req.body);
+    const allTodos = await Todo.find();
 
     res.status(201).json({
       status: 'success',
-      data: {
-        size: allPosts.length,
-        posts: allPosts,
-        post,
-      },
+      size: allTodos.length,
+      allTodos,
+      todo: newTodo,
     });
   } catch (error) {
     res.status(409).json({
       status: 'fail',
-      data: {
-        message: error.message,
-      },
+      message: error.message,
     });
   }
 };
@@ -96,24 +82,20 @@ export const createPost = async (req, res) => {
  *
  * @type {import("express").RequestHandler}
  */
-export const updatePost = async (req, res) => {
+export const updateTodo = async (req, res) => {
   try {
     const { id } = req.params;
-    const newPost = await Post
+    const updatedTodo = await Todo
       .findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
 
     res.status(201).json({
       status: 'success',
-      data: {
-        post: newPost,
-      },
+      todo: updatedTodo,
     });
   } catch (error) {
     res.status(409).json({
       status: 'fail',
-      data: {
-        message: error.message,
-      },
+      message: error.message,
     });
   }
 };
@@ -122,26 +104,22 @@ export const updatePost = async (req, res) => {
  *
  * @type {import("express").RequestHandler}
  */
-export const deletePost = async (req, res) => {
+export const deleteTodo = async (req, res) => {
   try {
     const { id } = req.params;
-    const newPost = await Post.findByIdAndDelete(id);
-    const allPosts = await Post.find();
+    await Todo.findByIdAndDelete(id);
+    const allTodos = await Todo.find();
 
     res.status(200).json({
       status: 'success',
-      data: {
-        size: allPosts.length,
-        posts: allPosts,
-        post: newPost,
-      },
+      size: allTodos.length,
+      allTodos,
+      todo: null,
     });
   } catch (error) {
     res.status(409).json({
       status: 'fail',
-      data: {
-        message: error.message,
-      },
+      message: error.message,
     });
   }
 };

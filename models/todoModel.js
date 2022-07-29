@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 
-const postSchema = new mongoose.Schema({
-  post: {
+const todoSchema = new mongoose.Schema({
+  todo: {
     type: String,
     required: true,
     unique: true,
@@ -11,4 +11,4 @@ const postSchema = new mongoose.Schema({
   },
 });
 
-export const Post = mongoose.model('Post', postSchema);
+export const Todo = mongoose.model('Todo', todoSchema);
