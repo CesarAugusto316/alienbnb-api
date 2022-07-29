@@ -8,11 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 5_000; // prod | dev
 
 // DB connection
-mongoose.connect(mongoDB.uri, {
-  dbName: 'postsDB',
-  user: mongoDB.user,
-  pass: mongoDB.password,
-})
+mongoose.connect('mongodb+srv://cesar:AhLueBvIUYDw3IQ3@larnu-bootcamp-01.55ojh.mongodb.net/?retryWrites=true&w=majority')
   .then((db) => {
     console.log('[DB⚡] connected to', db.connection.name);
   })
