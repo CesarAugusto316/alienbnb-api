@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import { postRoutes } from './routes/postsRoutes.js';
 import { mongoDB } from './models/configDB.js';
 
@@ -17,6 +18,9 @@ mongoose.connect('mongodb+srv://cesar:AhLueBvIUYDw3IQ3@larnu-bootcamp-01.55ojh.m
   });
 
 // midlewares
+app.use(cors({
+  origin: '*',
+}));
 app.use(express.json());
 app.use('/api/v1/posts', postRoutes);
 
