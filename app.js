@@ -1,14 +1,17 @@
-import express from "express";
+import express from 'express';
+
 
 const app = express();
 const PORT = process.env.PORT || 5_000; // prod | dev
 
-app.get("/", (req, res) => {
+app.use(express.json());
+
+app.get('/', (req, res) => {
   res.status(200).json({
-    status: "sucess",
+    status: 'sucess',
     data: {
       posts: [],
-      user: "larnU fullStack bootcamp",
+      user: 'npm updated',
     },
   });
 });
