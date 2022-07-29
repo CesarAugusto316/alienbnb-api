@@ -7,8 +7,8 @@ app.get("/", (req, res) => {
   res.status(200).json({
     status: "sucess",
     data: {
-      message: "hello world aliebnb",
-      student: "César Rivera",
+      posts: [],
+      user: "larnU fullStack bootcamp",
     },
   });
 });
