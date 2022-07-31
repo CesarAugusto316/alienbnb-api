@@ -9,6 +9,11 @@ const todoSchema = new mongoose.Schema({
     trim: true,
     minLength: 1,
   },
+  completed: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 export const Todo = mongoose.model('Todo', todoSchema);
